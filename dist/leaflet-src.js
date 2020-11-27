@@ -5043,9 +5043,11 @@ var Layers = Control.extend({
 	// @method removeLayer(layer: Layer): this
 	// Remove the given layer from the control.
 	removeLayer: function (layer) {
-		layer.off('add remove', this._onLayerChange, this);
-
-		var obj = this._getLayer(stamp(layer));
+		var obj = undefined;
+		if(layer) {
+			layer.off('add remove', this._onLayerChange, this);
+			var obj = this._getLayer(stamp(layer));
+		}
 		if (obj) {
 			this._layers.splice(this._layers.indexOf(obj), 1);
 		}
